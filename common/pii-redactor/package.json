@@ -1,0 +1,8 @@
+{
+  "name": "mcp-filter-pii-redactor",
+  "version": "1.0.0",
+  "description": "Post-response MCP filter that detects and masks PII.",
+  "main": "index.js",
+  "scripts": { "start": "node index.js" },
+  "license": "Apache-2.0"
+}

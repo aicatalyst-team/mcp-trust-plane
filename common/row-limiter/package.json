@@ -1,0 +1,8 @@
+{
+  "name": "mcp-filter-row-limiter",
+  "version": "1.2.0",
+  "description": "Post-response MCP filter that caps the number of rows returned.",
+  "main": "index.js",
+  "scripts": { "start": "node index.js" },
+  "license": "Apache-2.0"
+}

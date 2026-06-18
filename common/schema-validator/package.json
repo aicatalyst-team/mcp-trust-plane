@@ -1,0 +1,8 @@
+{
+  "name": "mcp-filter-schema-validator",
+  "version": "1.0.0",
+  "description": "Pre-request MCP filter that validates tool arguments against a per-tool JSON-Schema-lite spec.",
+  "main": "index.js",
+  "scripts": { "start": "node index.js" },
+  "license": "Apache-2.0"
+}

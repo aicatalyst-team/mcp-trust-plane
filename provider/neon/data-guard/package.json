@@ -1,0 +1,10 @@
+{
+  "name": "mcp-filter-neon-data-guard",
+  "version": "0.1.0",
+  "description": "Provider data guard for neon MCP integrations.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "license": "Apache-2.0"
+}

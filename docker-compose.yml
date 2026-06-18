@@ -1,0 +1,657 @@
+services:
+  sql-guard:
+    build: ./common/sql-guard
+    image: mcp-filter-sql-guard:latest
+    container_name: mcp-filter-sql-guard
+    ports:
+      - "6001:6001"
+    environment:
+      PORT: 6001
+    restart: unless-stopped
+
+  pii-redactor:
+    build: ./common/pii-redactor
+    image: mcp-filter-pii-redactor:latest
+    container_name: mcp-filter-pii-redactor
+    ports:
+      - "6002:6002"
+    environment:
+      PORT: 6002
+    restart: unless-stopped
+
+  row-limiter:
+    build: ./common/row-limiter
+    image: mcp-filter-row-limiter:latest
+    container_name: mcp-filter-row-limiter
+    ports:
+      - "6003:6003"
+    environment:
+      PORT: 6003
+    restart: unless-stopped
+
+  rate-limiter:
+    build: ./common/rate-limiter
+    image: mcp-filter-rate-limiter:latest
+    container_name: mcp-filter-rate-limiter
+    ports:
+      - "6007:6007"
+    environment:
+      PORT: 6007
+    restart: unless-stopped
+
+  schema-validator:
+    build: ./common/schema-validator
+    image: mcp-filter-schema-validator:latest
+    container_name: mcp-filter-schema-validator
+    ports:
+      - "6005:6005"
+    environment:
+      PORT: 6005
+      TOOL_DISCOVERY_BASE: ${TOOL_DISCOVERY_BASE:-http://172.16.1.86:5004}
+    restart: unless-stopped
+
+  field-masker:
+    build: ./common/field-masker
+    image: mcp-filter-field-masker:latest
+    container_name: mcp-filter-field-masker
+    ports:
+      - "6008:6008"
+    environment:
+      PORT: 6008
+    restart: unless-stopped
+
+  # PROVIDER_FILTERS_GENERATED
+  aws-data-guard:
+    build:
+      context: ./provider
+      dockerfile: aws/data-guard/Dockerfile
+    image: mcp-filter-aws-data-guard:latest
+    container_name: mcp-filter-aws-data-guard
+    ports:
+      - "6301:6301"
+    environment:
+      PORT: 6301
+    restart: unless-stopped
+  asana-data-guard:
+    build:
+      context: ./provider
+      dockerfile: asana/data-guard/Dockerfile
+    image: mcp-filter-asana-data-guard:latest
+    container_name: mcp-filter-asana-data-guard
+    ports:
+      - "6302:6302"
+    environment:
+      PORT: 6302
+    restart: unless-stopped
+  atlassian-data-guard:
+    build:
+      context: ./provider
+      dockerfile: atlassian/data-guard/Dockerfile
+    image: mcp-filter-atlassian-data-guard:latest
+    container_name: mcp-filter-atlassian-data-guard
+    ports:
+      - "6303:6303"
+    environment:
+      PORT: 6303
+    restart: unless-stopped
+  confluence-data-guard:
+    build:
+      context: ./provider
+      dockerfile: confluence/data-guard/Dockerfile
+    image: mcp-filter-confluence-data-guard:latest
+    container_name: mcp-filter-confluence-data-guard
+    ports:
+      - "6304:6304"
+    environment:
+      PORT: 6304
+    restart: unless-stopped
+  github-data-guard:
+    build:
+      context: ./provider
+      dockerfile: github/data-guard/Dockerfile
+    image: mcp-filter-github-data-guard:latest
+    container_name: mcp-filter-github-data-guard
+    ports:
+      - "6305:6305"
+    environment:
+      PORT: 6305
+    restart: unless-stopped
+  azure-data-guard:
+    build:
+      context: ./provider
+      dockerfile: azure/data-guard/Dockerfile
+    image: mcp-filter-azure-data-guard:latest
+    container_name: mcp-filter-azure-data-guard
+    ports:
+      - "6306:6306"
+    environment:
+      PORT: 6306
+    restart: unless-stopped
+  bigquery-data-guard:
+    build:
+      context: ./provider
+      dockerfile: bigquery/data-guard/Dockerfile
+    image: mcp-filter-bigquery-data-guard:latest
+    container_name: mcp-filter-bigquery-data-guard
+    ports:
+      - "6307:6307"
+    environment:
+      PORT: 6307
+    restart: unless-stopped
+  brave-search-data-guard:
+    build:
+      context: ./provider
+      dockerfile: brave-search/data-guard/Dockerfile
+    image: mcp-filter-brave-search-data-guard:latest
+    container_name: mcp-filter-brave-search-data-guard
+    ports:
+      - "6308:6308"
+    environment:
+      PORT: 6308
+    restart: unless-stopped
+  browserbase-data-guard:
+    build:
+      context: ./provider
+      dockerfile: browserbase/data-guard/Dockerfile
+    image: mcp-filter-browserbase-data-guard:latest
+    container_name: mcp-filter-browserbase-data-guard
+    ports:
+      - "6309:6309"
+    environment:
+      PORT: 6309
+    restart: unless-stopped
+  calendar-data-guard:
+    build:
+      context: ./provider
+      dockerfile: calendar/data-guard/Dockerfile
+    image: mcp-filter-calendar-data-guard:latest
+    container_name: mcp-filter-calendar-data-guard
+    ports:
+      - "6310:6310"
+    environment:
+      PORT: 6310
+    restart: unless-stopped
+  cloudflare-data-guard:
+    build:
+      context: ./provider
+      dockerfile: cloudflare/data-guard/Dockerfile
+    image: mcp-filter-cloudflare-data-guard:latest
+    container_name: mcp-filter-cloudflare-data-guard
+    ports:
+      - "6311:6311"
+    environment:
+      PORT: 6311
+    restart: unless-stopped
+  databricks-data-guard:
+    build:
+      context: ./provider
+      dockerfile: databricks/data-guard/Dockerfile
+    image: mcp-filter-databricks-data-guard:latest
+    container_name: mcp-filter-databricks-data-guard
+    ports:
+      - "6312:6312"
+    environment:
+      PORT: 6312
+    restart: unless-stopped
+  datadog-data-guard:
+    build:
+      context: ./provider
+      dockerfile: datadog/data-guard/Dockerfile
+    image: mcp-filter-datadog-data-guard:latest
+    container_name: mcp-filter-datadog-data-guard
+    ports:
+      - "6313:6313"
+    environment:
+      PORT: 6313
+    restart: unless-stopped
+  deepwiki-data-guard:
+    build:
+      context: ./provider
+      dockerfile: deepwiki/data-guard/Dockerfile
+    image: mcp-filter-deepwiki-data-guard:latest
+    container_name: mcp-filter-deepwiki-data-guard
+    ports:
+      - "6314:6314"
+    environment:
+      PORT: 6314
+    restart: unless-stopped
+  digitalocean-data-guard:
+    build:
+      context: ./provider
+      dockerfile: digitalocean/data-guard/Dockerfile
+    image: mcp-filter-digitalocean-data-guard:latest
+    container_name: mcp-filter-digitalocean-data-guard
+    ports:
+      - "6315:6315"
+    environment:
+      PORT: 6315
+    restart: unless-stopped
+  duckduckgo-data-guard:
+    build:
+      context: ./provider
+      dockerfile: duckduckgo/data-guard/Dockerfile
+    image: mcp-filter-duckduckgo-data-guard:latest
+    container_name: mcp-filter-duckduckgo-data-guard
+    ports:
+      - "6316:6316"
+    environment:
+      PORT: 6316
+    restart: unless-stopped
+  dynatrace-data-guard:
+    build:
+      context: ./provider
+      dockerfile: dynatrace/data-guard/Dockerfile
+    image: mcp-filter-dynatrace-data-guard:latest
+    container_name: mcp-filter-dynatrace-data-guard
+    ports:
+      - "6317:6317"
+    environment:
+      PORT: 6317
+    restart: unless-stopped
+  elasticsearch-data-guard:
+    build:
+      context: ./provider
+      dockerfile: elasticsearch/data-guard/Dockerfile
+    image: mcp-filter-elasticsearch-data-guard:latest
+    container_name: mcp-filter-elasticsearch-data-guard
+    ports:
+      - "6318:6318"
+    environment:
+      PORT: 6318
+    restart: unless-stopped
+  exa-search-data-guard:
+    build:
+      context: ./provider
+      dockerfile: exa-search/data-guard/Dockerfile
+    image: mcp-filter-exa-search-data-guard:latest
+    container_name: mcp-filter-exa-search-data-guard
+    ports:
+      - "6319:6319"
+    environment:
+      PORT: 6319
+    restart: unless-stopped
+  filescom-data-guard:
+    build:
+      context: ./provider
+      dockerfile: filescom/data-guard/Dockerfile
+    image: mcp-filter-filescom-data-guard:latest
+    container_name: mcp-filter-filescom-data-guard
+    ports:
+      - "6320:6320"
+    environment:
+      PORT: 6320
+    restart: unless-stopped
+  firecrawl-data-guard:
+    build:
+      context: ./provider
+      dockerfile: firecrawl/data-guard/Dockerfile
+    image: mcp-filter-firecrawl-data-guard:latest
+    container_name: mcp-filter-firecrawl-data-guard
+    ports:
+      - "6321:6321"
+    environment:
+      PORT: 6321
+    restart: unless-stopped
+  gitlab-data-guard:
+    build:
+      context: ./provider
+      dockerfile: gitlab/data-guard/Dockerfile
+    image: mcp-filter-gitlab-data-guard:latest
+    container_name: mcp-filter-gitlab-data-guard
+    ports:
+      - "6322:6322"
+    environment:
+      PORT: 6322
+    restart: unless-stopped
+  gmail-data-guard:
+    build:
+      context: ./provider
+      dockerfile: gmail/data-guard/Dockerfile
+    image: mcp-filter-gmail-data-guard:latest
+    container_name: mcp-filter-gmail-data-guard
+    ports:
+      - "6323:6323"
+    environment:
+      PORT: 6323
+    restart: unless-stopped
+  google-data-guard:
+    build:
+      context: ./provider
+      dockerfile: google/data-guard/Dockerfile
+    image: mcp-filter-google-data-guard:latest
+    container_name: mcp-filter-google-data-guard
+    ports:
+      - "6324:6324"
+    environment:
+      PORT: 6324
+    restart: unless-stopped
+  grafana-data-guard:
+    build:
+      context: ./provider
+      dockerfile: grafana/data-guard/Dockerfile
+    image: mcp-filter-grafana-data-guard:latest
+    container_name: mcp-filter-grafana-data-guard
+    ports:
+      - "6325:6325"
+    environment:
+      PORT: 6325
+    restart: unless-stopped
+  hubspot-data-guard:
+    build:
+      context: ./provider
+      dockerfile: hubspot/data-guard/Dockerfile
+    image: mcp-filter-hubspot-data-guard:latest
+    container_name: mcp-filter-hubspot-data-guard
+    ports:
+      - "6326:6326"
+    environment:
+      PORT: 6326
+    restart: unless-stopped
+  linear-data-guard:
+    build:
+      context: ./provider
+      dockerfile: linear/data-guard/Dockerfile
+    image: mcp-filter-linear-data-guard:latest
+    container_name: mcp-filter-linear-data-guard
+    ports:
+      - "6327:6327"
+    environment:
+      PORT: 6327
+    restart: unless-stopped
+  markitdown-data-guard:
+    build:
+      context: ./provider
+      dockerfile: markitdown/data-guard/Dockerfile
+    image: mcp-filter-markitdown-data-guard:latest
+    container_name: mcp-filter-markitdown-data-guard
+    ports:
+      - "6328:6328"
+    environment:
+      PORT: 6328
+    restart: unless-stopped
+  microsoft-data-guard:
+    build:
+      context: ./provider
+      dockerfile: microsoft/data-guard/Dockerfile
+    image: mcp-filter-microsoft-data-guard:latest
+    container_name: mcp-filter-microsoft-data-guard
+    ports:
+      - "6329:6329"
+    environment:
+      PORT: 6329
+    restart: unless-stopped
+  mondaycom-data-guard:
+    build:
+      context: ./provider
+      dockerfile: mondaycom/data-guard/Dockerfile
+    image: mcp-filter-mondaycom-data-guard:latest
+    container_name: mcp-filter-mondaycom-data-guard
+    ports:
+      - "6330:6330"
+    environment:
+      PORT: 6330
+    restart: unless-stopped
+  mongodb-data-guard:
+    build:
+      context: ./provider
+      dockerfile: mongodb/data-guard/Dockerfile
+    image: mcp-filter-mongodb-data-guard:latest
+    container_name: mcp-filter-mongodb-data-guard
+    ports:
+      - "6331:6331"
+    environment:
+      PORT: 6331
+    restart: unless-stopped
+  morningstar-data-guard:
+    build:
+      context: ./provider
+      dockerfile: morningstar/data-guard/Dockerfile
+    image: mcp-filter-morningstar-data-guard:latest
+    container_name: mcp-filter-morningstar-data-guard
+    ports:
+      - "6332:6332"
+    environment:
+      PORT: 6332
+    restart: unless-stopped
+  mysql-data-guard:
+    build:
+      context: ./provider
+      dockerfile: mysql/data-guard/Dockerfile
+    image: mcp-filter-mysql-data-guard:latest
+    container_name: mcp-filter-mysql-data-guard
+    ports:
+      - "6333:6333"
+    environment:
+      PORT: 6333
+    restart: unless-stopped
+  neon-data-guard:
+    build:
+      context: ./provider
+      dockerfile: neon/data-guard/Dockerfile
+    image: mcp-filter-neon-data-guard:latest
+    container_name: mcp-filter-neon-data-guard
+    ports:
+      - "6334:6334"
+    environment:
+      PORT: 6334
+    restart: unless-stopped
+  notion-data-guard:
+    build:
+      context: ./provider
+      dockerfile: notion/data-guard/Dockerfile
+    image: mcp-filter-notion-data-guard:latest
+    container_name: mcp-filter-notion-data-guard
+    ports:
+      - "6335:6335"
+    environment:
+      PORT: 6335
+    restart: unless-stopped
+  onedrive-data-guard:
+    build:
+      context: ./provider
+      dockerfile: onedrive/data-guard/Dockerfile
+    image: mcp-filter-onedrive-data-guard:latest
+    container_name: mcp-filter-onedrive-data-guard
+    ports:
+      - "6336:6336"
+    environment:
+      PORT: 6336
+    restart: unless-stopped
+  outlook-data-guard:
+    build:
+      context: ./provider
+      dockerfile: outlook/data-guard/Dockerfile
+    image: mcp-filter-outlook-data-guard:latest
+    container_name: mcp-filter-outlook-data-guard
+    ports:
+      - "6337:6337"
+    environment:
+      PORT: 6337
+    restart: unless-stopped
+  pagerduty-data-guard:
+    build:
+      context: ./provider
+      dockerfile: pagerduty/data-guard/Dockerfile
+    image: mcp-filter-pagerduty-data-guard:latest
+    container_name: mcp-filter-pagerduty-data-guard
+    ports:
+      - "6338:6338"
+    environment:
+      PORT: 6338
+    restart: unless-stopped
+  paypal-data-guard:
+    build:
+      context: ./provider
+      dockerfile: paypal/data-guard/Dockerfile
+    image: mcp-filter-paypal-data-guard:latest
+    container_name: mcp-filter-paypal-data-guard
+    ports:
+      - "6339:6339"
+    environment:
+      PORT: 6339
+    restart: unless-stopped
+  playwright-data-guard:
+    build:
+      context: ./provider
+      dockerfile: playwright/data-guard/Dockerfile
+    image: mcp-filter-playwright-data-guard:latest
+    container_name: mcp-filter-playwright-data-guard
+    ports:
+      - "6340:6340"
+    environment:
+      PORT: 6340
+    restart: unless-stopped
+  postgresql-data-guard:
+    build:
+      context: ./provider
+      dockerfile: postgresql/data-guard/Dockerfile
+    image: mcp-filter-postgresql-data-guard:latest
+    container_name: mcp-filter-postgresql-data-guard
+    ports:
+      - "6341:6341"
+    environment:
+      PORT: 6341
+    restart: unless-stopped
+  postman-data-guard:
+    build:
+      context: ./provider
+      dockerfile: postman/data-guard/Dockerfile
+    image: mcp-filter-postman-data-guard:latest
+    container_name: mcp-filter-postman-data-guard
+    ports:
+      - "6342:6342"
+    environment:
+      PORT: 6342
+    restart: unless-stopped
+  redis-data-guard:
+    build:
+      context: ./provider
+      dockerfile: redis/data-guard/Dockerfile
+    image: mcp-filter-redis-data-guard:latest
+    container_name: mcp-filter-redis-data-guard
+    ports:
+      - "6343:6343"
+    environment:
+      PORT: 6343
+    restart: unless-stopped
+  salesforce-data-guard:
+    build:
+      context: ./provider
+      dockerfile: salesforce/data-guard/Dockerfile
+    image: mcp-filter-salesforce-data-guard:latest
+    container_name: mcp-filter-salesforce-data-guard
+    ports:
+      - "6344:6344"
+    environment:
+      PORT: 6344
+    restart: unless-stopped
+  slack-data-guard:
+    build:
+      context: ./provider
+      dockerfile: slack/data-guard/Dockerfile
+    image: mcp-filter-slack-data-guard:latest
+    container_name: mcp-filter-slack-data-guard
+    ports:
+      - "6345:6345"
+    environment:
+      PORT: 6345
+    restart: unless-stopped
+  snowflake-data-guard:
+    build:
+      context: ./provider
+      dockerfile: snowflake/data-guard/Dockerfile
+    image: mcp-filter-snowflake-data-guard:latest
+    container_name: mcp-filter-snowflake-data-guard
+    ports:
+      - "6346:6346"
+    environment:
+      PORT: 6346
+    restart: unless-stopped
+  square-data-guard:
+    build:
+      context: ./provider
+      dockerfile: square/data-guard/Dockerfile
+    image: mcp-filter-square-data-guard:latest
+    container_name: mcp-filter-square-data-guard
+    ports:
+      - "6347:6347"
+    environment:
+      PORT: 6347
+    restart: unless-stopped
+  stripe-data-guard:
+    build:
+      context: ./provider
+      dockerfile: stripe/data-guard/Dockerfile
+    image: mcp-filter-stripe-data-guard:latest
+    container_name: mcp-filter-stripe-data-guard
+    ports:
+      - "6348:6348"
+    environment:
+      PORT: 6348
+    restart: unless-stopped
+  supabase-data-guard:
+    build:
+      context: ./provider
+      dockerfile: supabase/data-guard/Dockerfile
+    image: mcp-filter-supabase-data-guard:latest
+    container_name: mcp-filter-supabase-data-guard
+    ports:
+      - "6349:6349"
+    environment:
+      PORT: 6349
+    restart: unless-stopped
+  tableau-data-guard:
+    build:
+      context: ./provider
+      dockerfile: tableau/data-guard/Dockerfile
+    image: mcp-filter-tableau-data-guard:latest
+    container_name: mcp-filter-tableau-data-guard
+    ports:
+      - "6350:6350"
+    environment:
+      PORT: 6350
+    restart: unless-stopped
+  tavily-search-data-guard:
+    build:
+      context: ./provider
+      dockerfile: tavily-search/data-guard/Dockerfile
+    image: mcp-filter-tavily-search-data-guard:latest
+    container_name: mcp-filter-tavily-search-data-guard
+    ports:
+      - "6351:6351"
+    environment:
+      PORT: 6351
+    restart: unless-stopped
+  terraform-data-guard:
+    build:
+      context: ./provider
+      dockerfile: terraform/data-guard/Dockerfile
+    image: mcp-filter-terraform-data-guard:latest
+    container_name: mcp-filter-terraform-data-guard
+    ports:
+      - "6352:6352"
+    environment:
+      PORT: 6352
+    restart: unless-stopped
+  wordpress-data-guard:
+    build:
+      context: ./provider
+      dockerfile: wordpress/data-guard/Dockerfile
+    image: mcp-filter-wordpress-data-guard:latest
+    container_name: mcp-filter-wordpress-data-guard
+    ports:
+      - "6353:6353"
+    environment:
+      PORT: 6353
+    restart: unless-stopped
+  zapier-data-guard:
+    build:
+      context: ./provider
+      dockerfile: zapier/data-guard/Dockerfile
+    image: mcp-filter-zapier-data-guard:latest
+    container_name: mcp-filter-zapier-data-guard
+    ports:
+      - "6354:6354"
+    environment:
+      PORT: 6354
+    restart: unless-stopped

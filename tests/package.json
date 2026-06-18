@@ -1,0 +1,11 @@
+{
+  "name": "mcp-filters-contract-tests",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "test": "node contract.js",
+    "test:contract": "node contract.js",
+    "test:behaviour": "node behaviour.js",
+    "test:all": "node contract.js && node behaviour.js"
+  }
+}

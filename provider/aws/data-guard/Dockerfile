@@ -1,0 +1,9 @@
+FROM node:20-alpine
+WORKDIR /app
+COPY _lib /app/provider/_lib
+COPY aws/data-guard /app/provider/aws/data-guard
+WORKDIR /app/provider/aws/data-guard
+EXPOSE 6301
+ENV PORT=6301
+HEALTHCHECK --interval=30s --timeout=3s CMD wget -qO- http://localhost:6301/health || exit 1
+CMD ["node", "index.js"]

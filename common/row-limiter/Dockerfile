@@ -1,0 +1,6 @@
+FROM node:20-alpine
+WORKDIR /app
+COPY package.json index.js ./
+EXPOSE 6003
+HEALTHCHECK --interval=30s --timeout=3s CMD wget -qO- http://localhost:6003/health || exit 1
+CMD ["node", "index.js"]

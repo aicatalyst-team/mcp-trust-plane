@@ -1,0 +1,10 @@
+{
+  "name": "mcp-filter-markitdown-data-guard",
+  "version": "0.1.0",
+  "description": "Provider data guard for markitdown MCP integrations.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "license": "Apache-2.0"
+}

@@ -1,0 +1,955 @@
+{
+  "providers": [
+    {
+      "id": "aws",
+      "title": "AWS",
+      "port": 6301,
+      "preserveExisting": true,
+      "blockedTools": [
+        "delete_bucket",
+        "delete_user",
+        "terminate_instances",
+        "delete_db_instance"
+      ],
+      "maskedFields": [
+        "SecretAccessKey",
+        "SessionToken",
+        "access_key_id"
+      ]
+    },
+    {
+      "id": "asana",
+      "title": "Asana",
+      "port": 6302,
+      "preserveExisting": true,
+      "blockedTools": [
+        "delete_project",
+        "delete_task",
+        "delete_workspace"
+      ],
+      "maskedFields": [
+        "email",
+        "personal_access_token",
+        "phone"
+      ]
+    },
+    {
+      "id": "atlassian",
+      "title": "Atlassian",
+      "port": 6303,
+      "preserveExisting": true,
+      "blockedTools": [
+        "delete_issue",
+        "delete_project",
+        "remove_permission"
+      ],
+      "maskedFields": [
+        "emailAddress",
+        "accountId",
+        "api_token"
+      ]
+    },
+    {
+      "id": "confluence",
+      "title": "Confluence",
+      "port": 6304,
+      "preserveExisting": true,
+      "blockedTools": [
+        "delete_space",
+        "delete_page",
+        "export_space"
+      ],
+      "maskedFields": [
+        "email",
+        "author_email"
+      ],
+      "truncateBodyFields": [
+        "body",
+        "storage",
+        "content"
+      ]
+    },
+    {
+      "id": "github",
+      "title": "GitHub",
+      "port": 6305,
+      "preserveExisting": true,
+      "blockedTools": [
+        "delete_repository",
+        "delete_branch",
+        "force_push"
+      ],
+      "maskedFields": [
+        "email",
+        "token",
+        "access_token"
+      ],
+      "tokenReplacers": [
+        {
+          "source": "\\bghp_[A-Za-z0-9]{20,}\\b",
+          "replacement": "ghp_[REDACTED]"
+        },
+        {
+          "source": "\\bgithub_pat_[A-Za-z0-9_]{20,}\\b",
+          "replacement": "github_pat_[REDACTED]"
+        }
+      ]
+    },
+    {
+      "id": "azure",
+      "title": "Azure",
+      "port": 6306,
+      "blockedTools": [
+        "delete_resource_group",
+        "delete_storage_account",
+        "delete_key_vault",
+        "delete_sql_server",
+        "purge_key"
+      ],
+      "maskedFields": [
+        "client_secret",
+        "subscription_key",
+        "connection_string",
+        "access_token",
+        "tenant_secret"
+      ],
+      "tokenReplacers": [
+        {
+          "source": "\\b[A-Za-z0-9+/]{86}==\\b",
+          "replacement": "[AZURE_SECRET_REDACTED]"
+        }
+      ]
+    },
+    {
+      "id": "bigquery",
+      "title": "BigQuery",
+      "port": 6307,
+      "blockedTools": [
+        "delete_dataset",
+        "delete_table",
+        "delete_model",
+        "drop_table"
+      ],
+      "maskedFields": [
+        "private_key",
+        "client_email",
+        "credentials",
+        "service_account"
+      ],
+      "tokenReplacers": [
+        {
+          "source": "-----BEGIN PRIVATE KEY-----[\\s\\S]*?-----END PRIVATE KEY-----",
+          "replacement": "[PRIVATE_KEY_REDACTED]"
+        }
+      ]
+    },
+    {
+      "id": "brave-search",
+      "title": "Brave Search",
+      "port": 6308,
+      "blockedTools": [],
+      "maskedFields": [
+        "api_key",
+        "subscription_token"
+      ],
+      "tokenReplacers": [
+        {
+          "source": "\\bBSA[A-Za-z0-9_-]{20,}\\b",
+          "replacement": "BSA[REDACTED]"
+        }
+      ],
+      "preRequestOnly": false
+    },
+    {
+      "id": "browserbase",
+      "title": "Browserbase",
+      "port": 6309,
+      "blockedTools": [
+        "delete_session",
+        "delete_project",
+        "terminate_session"
+      ],
+      "maskedFields": [
+        "api_key",
+        "project_id",
+        "session_token"
+      ]
+    },
+    {
+      "id": "calendar",
+      "title": "Google Calendar",
+      "port": 6310,
+      "blockedTools": [
+        "delete_event",
+        "delete_calendar",
+        "clear_calendar"
+      ],
+      "maskedFields": [
+        "email",
+        "attendee_email",
+        "organizer_email",
+        "access_token"
+      ]
+    },
+    {
+      "id": "cloudflare",
+      "title": "Cloudflare",
+      "port": 6311,
+      "blockedTools": [
+        "delete_zone",
+        "purge_cache",
+        "delete_dns_record",
+        "delete_worker"
+      ],
+      "maskedFields": [
+        "api_token",
+        "api_key",
+        "origin_ca_key"
+      ],
+      "tokenReplacers": [
+        {
+          "source": "\\b[A-Za-z0-9_-]{40}\\b",
+          "replacement": "[CF_TOKEN_REDACTED]"
+        }
+      ]
+    },
+    {
+      "id": "databricks",
+      "title": "Databricks",
+      "port": 6312,
+      "blockedTools": [
+        "delete_cluster",
+        "delete_job",
+        "delete_workspace",
+        "terminate_cluster"
+      ],
+      "maskedFields": [
+        "token",
+        "pat",
+        "personal_access_token",
+        "connection_string"
+      ]
+    },
+    {
+      "id": "datadog",
+      "title": "Datadog",
+      "port": 6313,
+      "blockedTools": [
+        "delete_monitor",
+        "delete_dashboard",
+        "delete_user",
+        "mute_all"
+      ],
+      "maskedFields": [
+        "api_key",
+        "app_key",
+        "application_key"
+      ]
+    },
+    {
+      "id": "deepwiki",
+      "title": "DeepWiki",
+      "port": 6314,
+      "blockedTools": [
+        "delete_repo",
+        "delete_index"
+      ],
+      "maskedFields": [
+        "api_key",
+        "token"
+      ]
+    },
+    {
+      "id": "digitalocean",
+      "title": "DigitalOcean",
+      "port": 6315,
+      "blockedTools": [
+        "delete_droplet",
+        "delete_database",
+        "delete_domain",
+        "delete_firewall"
+      ],
+      "maskedFields": [
+        "token",
+        "access_token",
+        "secret"
+      ]
+    },
+    {
+      "id": "duckduckgo",
+      "title": "DuckDuckGo",
+      "port": 6316,
+      "blockedTools": [],
+      "maskedFields": [
+        "api_key",
+        "token"
+      ]
+    },
+    {
+      "id": "dynatrace",
+      "title": "Dynatrace",
+      "port": 6317,
+      "blockedTools": [
+        "delete_monitor",
+        "delete_application",
+        "delete_environment"
+      ],
+      "maskedFields": [
+        "api_token",
+        "access_token",
+        "tenant_token"
+      ]
+    },
+    {
+      "id": "elasticsearch",
+      "title": "Elasticsearch",
+      "port": 6318,
+      "blockedTools": [
+        "delete_index",
+        "delete_document",
+        "delete_template",
+        "drop_index"
+      ],
+      "maskedFields": [
+        "password",
+        "api_key",
+        "authorization",
+        "credentials"
+      ]
+    },
+    {
+      "id": "exa-search",
+      "title": "Exa Search",
+      "port": 6319,
+      "blockedTools": [],
+      "maskedFields": [
+        "api_key",
+        "x-api-key"
+      ]
+    },
+    {
+      "id": "filescom",
+      "title": "Files.com",
+      "port": 6320,
+      "blockedTools": [
+        "delete_file",
+        "delete_folder",
+        "delete_user",
+        "purge"
+      ],
+      "maskedFields": [
+        "api_key",
+        "password",
+        "sftp_password"
+      ]
+    },
+    {
+      "id": "firecrawl",
+      "title": "Firecrawl",
+      "port": 6321,
+      "blockedTools": [
+        "delete_crawl",
+        "cancel_crawl"
+      ],
+      "maskedFields": [
+        "api_key",
+        "fc-api-key"
+      ]
+    },
+    {
+      "id": "gitlab",
+      "title": "GitLab",
+      "port": 6322,
+      "blockedTools": [
+        "delete_project",
+        "delete_branch",
+        "delete_repository",
+        "remove_member"
+      ],
+      "maskedFields": [
+        "email",
+        "private_token",
+        "access_token"
+      ],
+      "tokenReplacers": [
+        {
+          "source": "\\bglpat-[A-Za-z0-9_-]{20,}\\b",
+          "replacement": "glpat-[REDACTED]"
+        }
+      ]
+    },
+    {
+      "id": "gmail",
+      "title": "Gmail",
+      "port": 6323,
+      "blockedTools": [
+        "delete_message",
+        "delete_draft",
+        "send_message",
+        "modify_labels_delete"
+      ],
+      "maskedFields": [
+        "email",
+        "from",
+        "to",
+        "cc",
+        "access_token",
+        "refresh_token"
+      ]
+    },
+    {
+      "id": "google",
+      "title": "Google",
+      "port": 6324,
+      "blockedTools": [
+        "delete_file",
+        "delete_document",
+        "delete_presentation",
+        "delete_spreadsheet",
+        "delete_permission"
+      ],
+      "maskedFields": [
+        "access_token",
+        "refresh_token",
+        "client_secret",
+        "email",
+        "owner_email"
+      ]
+    },
+    {
+      "id": "grafana",
+      "title": "Grafana",
+      "port": 6325,
+      "blockedTools": [
+        "delete_dashboard",
+        "delete_folder",
+        "delete_user",
+        "delete_org"
+      ],
+      "maskedFields": [
+        "api_key",
+        "service_account_token",
+        "password"
+      ]
+    },
+    {
+      "id": "hubspot",
+      "title": "HubSpot",
+      "port": 6326,
+      "blockedTools": [
+        "delete_contact",
+        "delete_company",
+        "delete_deal",
+        "delete_ticket"
+      ],
+      "maskedFields": [
+        "access_token",
+        "refresh_token",
+        "email",
+        "hs_email"
+      ]
+    },
+    {
+      "id": "linear",
+      "title": "Linear",
+      "port": 6327,
+      "blockedTools": [
+        "delete_issue",
+        "delete_project",
+        "delete_team",
+        "archive_issue"
+      ],
+      "maskedFields": [
+        "api_key",
+        "email",
+        "assignee_email"
+      ]
+    },
+    {
+      "id": "markitdown",
+      "title": "MarkItDown",
+      "port": 6328,
+      "blockedTools": [],
+      "maskedFields": [
+        "path",
+        "file_path",
+        "local_path"
+      ],
+      "truncateBodyFields": [
+        "content",
+        "markdown",
+        "body"
+      ],
+      "maxBodyChars": 8000
+    },
+    {
+      "id": "microsoft",
+      "title": "Microsoft",
+      "port": 6329,
+      "blockedTools": [
+        "delete_item",
+        "delete_user",
+        "delete_group",
+        "delete_mailbox",
+        "remove_member"
+      ],
+      "maskedFields": [
+        "access_token",
+        "refresh_token",
+        "client_secret",
+        "mail",
+        "userPrincipalName"
+      ]
+    },
+    {
+      "id": "mondaycom",
+      "title": "Monday.com",
+      "port": 6330,
+      "blockedTools": [
+        "delete_board",
+        "delete_item",
+        "delete_group",
+        "delete_workspace"
+      ],
+      "maskedFields": [
+        "api_token",
+        "email"
+      ]
+    },
+    {
+      "id": "mongodb",
+      "title": "MongoDB",
+      "port": 6331,
+      "blockedTools": [
+        "drop_database",
+        "drop_collection",
+        "delete_many",
+        "drop_index"
+      ],
+      "maskedFields": [
+        "connection_string",
+        "password",
+        "uri"
+      ],
+      "tokenReplacers": [
+        {
+          "source": "mongodb\\+srv://[^\\s\\\"']+",
+          "replacement": "mongodb+srv://[REDACTED]"
+        },
+        {
+          "source": "mongodb://[^\\s\\\"']+",
+          "replacement": "mongodb://[REDACTED]"
+        }
+      ]
+    },
+    {
+      "id": "morningstar",
+      "title": "Morningstar",
+      "port": 6332,
+      "blockedTools": [],
+      "maskedFields": [
+        "api_key",
+        "client_id",
+        "client_secret",
+        "access_token"
+      ]
+    },
+    {
+      "id": "mysql",
+      "title": "MySQL",
+      "port": 6333,
+      "blockedTools": [
+        "drop_table",
+        "drop_database",
+        "delete",
+        "truncate",
+        "alter_table"
+      ],
+      "maskedFields": [
+        "password",
+        "connection_string"
+      ]
+    },
+    {
+      "id": "neon",
+      "title": "Neon",
+      "port": 6334,
+      "blockedTools": [
+        "delete_project",
+        "delete_branch",
+        "delete_database",
+        "reset_branch"
+      ],
+      "maskedFields": [
+        "connection_string",
+        "password",
+        "api_key"
+      ]
+    },
+    {
+      "id": "notion",
+      "title": "Notion",
+      "port": 6335,
+      "blockedTools": [
+        "delete_page",
+        "delete_block",
+        "delete_database",
+        "archive_page"
+      ],
+      "maskedFields": [
+        "integration_token",
+        "token",
+        "email",
+        "created_by_email"
+      ]
+    },
+    {
+      "id": "onedrive",
+      "title": "OneDrive",
+      "port": 6336,
+      "blockedTools": [
+        "delete_item",
+        "delete_drive",
+        "permanent_delete",
+        "remove_permission"
+      ],
+      "maskedFields": [
+        "access_token",
+        "share_url",
+        "webUrl",
+        "email"
+      ]
+    },
+    {
+      "id": "outlook",
+      "title": "Outlook",
+      "port": 6337,
+      "blockedTools": [
+        "delete_message",
+        "delete_event",
+        "send_mail",
+        "move_to_deleted"
+      ],
+      "maskedFields": [
+        "access_token",
+        "email",
+        "from",
+        "to",
+        "cc"
+      ]
+    },
+    {
+      "id": "pagerduty",
+      "title": "PagerDuty",
+      "port": 6338,
+      "blockedTools": [
+        "delete_service",
+        "delete_escalation_policy",
+        "delete_user",
+        "delete_schedule"
+      ],
+      "maskedFields": [
+        "routing_key",
+        "integration_key",
+        "api_key",
+        "token"
+      ]
+    },
+    {
+      "id": "paypal",
+      "title": "PayPal",
+      "port": 6339,
+      "blockedTools": [
+        "create_refund",
+        "capture_refund",
+        "delete_webhook",
+        "cancel_subscription"
+      ],
+      "maskedFields": [
+        "client_secret",
+        "access_token",
+        "payer_email",
+        "email"
+      ]
+    },
+    {
+      "id": "playwright",
+      "title": "Playwright",
+      "port": 6340,
+      "blockedTools": [
+        "evaluate",
+        "execute_script",
+        "run_code",
+        "shell",
+        "download_file"
+      ],
+      "maskedFields": [
+        "cookie",
+        "authorization",
+        "local_storage",
+        "session_storage"
+      ],
+      "truncateBodyFields": [
+        "html",
+        "content",
+        "screenshot"
+      ],
+      "maxBodyChars": 16000
+    },
+    {
+      "id": "postgresql",
+      "title": "PostgreSQL",
+      "port": 6341,
+      "blockedTools": [
+        "drop_table",
+        "drop_database",
+        "delete",
+        "truncate",
+        "alter_table"
+      ],
+      "maskedFields": [
+        "password",
+        "connection_string"
+      ],
+      "tokenReplacers": [
+        {
+          "source": "postgres(?:ql)?://[^\\s\\\"']+",
+          "replacement": "postgresql://[REDACTED]"
+        }
+      ]
+    },
+    {
+      "id": "postman",
+      "title": "Postman",
+      "port": 6342,
+      "blockedTools": [
+        "delete_collection",
+        "delete_environment",
+        "delete_workspace"
+      ],
+      "maskedFields": [
+        "api_key",
+        "access_token",
+        "x-api-key"
+      ]
+    },
+    {
+      "id": "redis",
+      "title": "Redis",
+      "port": 6343,
+      "blockedTools": [
+        "flushall",
+        "flushdb",
+        "del",
+        "delete",
+        "config_set"
+      ],
+      "maskedFields": [
+        "password",
+        "auth",
+        "connection_string"
+      ]
+    },
+    {
+      "id": "salesforce",
+      "title": "Salesforce",
+      "port": 6344,
+      "blockedTools": [
+        "delete_record",
+        "delete_sobject",
+        "destroy",
+        "hard_delete"
+      ],
+      "maskedFields": [
+        "access_token",
+        "refresh_token",
+        "session_id",
+        "Email",
+        "Phone"
+      ]
+    },
+    {
+      "id": "slack",
+      "title": "Slack",
+      "port": 6345,
+      "blockedTools": [
+        "delete_channel",
+        "archive_channel",
+        "remove_user",
+        "delete_message"
+      ],
+      "maskedFields": [
+        "token",
+        "bot_token",
+        "user_token",
+        "email"
+      ],
+      "tokenReplacers": [
+        {
+          "source": "\\bxox[baprs]-[A-Za-z0-9-]{10,}\\b",
+          "replacement": "xox[REDACTED]"
+        }
+      ]
+    },
+    {
+      "id": "snowflake",
+      "title": "Snowflake",
+      "port": 6346,
+      "blockedTools": [
+        "drop_warehouse",
+        "drop_database",
+        "drop_schema",
+        "drop_table",
+        "delete"
+      ],
+      "maskedFields": [
+        "password",
+        "private_key",
+        "connection_string",
+        "token"
+      ]
+    },
+    {
+      "id": "square",
+      "title": "Square",
+      "port": 6347,
+      "blockedTools": [
+        "delete_customer",
+        "delete_payment",
+        "refund_payment",
+        "delete_catalog"
+      ],
+      "maskedFields": [
+        "access_token",
+        "application_secret",
+        "email",
+        "phone_number"
+      ]
+    },
+    {
+      "id": "stripe",
+      "title": "Stripe",
+      "port": 6348,
+      "blockedTools": [
+        "delete_customer",
+        "create_refund",
+        "cancel_subscription",
+        "delete_product"
+      ],
+      "maskedFields": [
+        "secret_key",
+        "api_key",
+        "email",
+        "card_number"
+      ],
+      "tokenReplacers": [
+        {
+          "source": "\\b(sk|rk)_(live|test)_[A-Za-z0-9]{10,}\\b",
+          "replacement": "sk_[REDACTED]"
+        }
+      ]
+    },
+    {
+      "id": "supabase",
+      "title": "Supabase",
+      "port": 6349,
+      "blockedTools": [
+        "delete_project",
+        "delete_branch",
+        "drop_table",
+        "delete_user"
+      ],
+      "maskedFields": [
+        "service_role_key",
+        "anon_key",
+        "connection_string",
+        "password"
+      ]
+    },
+    {
+      "id": "tableau",
+      "title": "Tableau",
+      "port": 6350,
+      "blockedTools": [
+        "delete_workbook",
+        "delete_datasource",
+        "delete_project",
+        "delete_user"
+      ],
+      "maskedFields": [
+        "personal_access_token",
+        "password",
+        "secret",
+        "email"
+      ]
+    },
+    {
+      "id": "tavily-search",
+      "title": "Tavily Search",
+      "port": 6351,
+      "blockedTools": [],
+      "maskedFields": [
+        "api_key",
+        "tavily_api_key"
+      ]
+    },
+    {
+      "id": "terraform",
+      "title": "Terraform",
+      "port": 6352,
+      "blockedTools": [
+        "destroy",
+        "apply",
+        "force_unlock",
+        "delete_workspace"
+      ],
+      "maskedFields": [
+        "token",
+        "api_token",
+        "sensitive",
+        "password"
+      ],
+      "tokenReplacers": [
+        {
+          "source": "\\b[A-Za-z0-9]{14}\\.[A-Za-z0-9]{16}\\.[A-Za-z0-9]{16}\\b",
+          "replacement": "[TF_TOKEN_REDACTED]"
+        }
+      ]
+    },
+    {
+      "id": "wordpress",
+      "title": "WordPress",
+      "port": 6353,
+      "blockedTools": [
+        "delete_post",
+        "delete_user",
+        "delete_plugin",
+        "delete_theme",
+        "drop_table"
+      ],
+      "maskedFields": [
+        "application_password",
+        "password",
+        "email",
+        "auth_token"
+      ]
+    },
+    {
+      "id": "zapier",
+      "title": "Zapier",
+      "port": 6354,
+      "blockedTools": [
+        "delete_zap",
+        "turn_off_zap",
+        "delete_hook",
+        "delete_app"
+      ],
+      "maskedFields": [
+        "api_key",
+        "oauth_token",
+        "access_token",
+        "email"
+      ]
+    }
+  ]
+}

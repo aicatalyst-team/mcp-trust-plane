@@ -1,0 +1,10 @@
+{
+  "name": "mcp-filter-azure-data-guard",
+  "version": "0.1.0",
+  "description": "Provider data guard for azure MCP integrations.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "license": "Apache-2.0"
+}
