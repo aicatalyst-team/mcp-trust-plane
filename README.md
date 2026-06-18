@@ -1,4 +1,4 @@
-# MCP Filters
+# MCP Trust Plane
 
 A pluggable, language-agnostic filter framework for Model Context Protocol
 (MCP) traffic. Each filter is a tiny HTTP service that decides whether a
