@@ -1,19 +1,93 @@
+# ========================================
+# Node.js / JavaScript
+# ========================================
 
-node_modules/
+# Logs
+logs
 *.log
-.DS_Store
-.env
-.env.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Dependencies
+node_modules/
+jspm_packages/
+bower_components/
+
+# Build outputs
 dist/
 build/
+out/
+.next/
+.nuxt/
+.output/
+.cache/
+.parcel-cache/
+.svelte-kit/
+.vite/
+webpack/
 
-# ==========================================
-# 4. EDITOR & IDE SPECIFIC
-# ==========================================
-# VS Code
-.vscode/
-*.code-workspace
-.history/
+# Coverage
+coverage/
+*.lcov
+.nyc_output
+
+# TypeScript
+*.tsbuildinfo
+
+# Package managers
+.npm
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.pnpm-store
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.development
+.env.test
+.env.production
+!.env.example
+
+# ========================================
+# Docker
+# ========================================
+
+*.docker
+Dockerfile.*.bak
+docker-compose.override.yml
+docker-compose.*.yml
+
+.docker/
+volumes/
+data/
+
+# ========================================
+# Shell Scripts
+# ========================================
+
+*.sh~
+*.bash_history
+*.zsh_history
+*.fish_history
+*.tmp
+*.temp
+
+# ========================================
+# Editors & IDEs
+# ========================================
 
 # JetBrains (IntelliJ, PyCharm, WebStorm)
 .idea/
@@ -28,10 +102,42 @@ build/
 .project
 .settings/
 
-# Vim
+# Visual Studio Code - Ignore everything by default (safest)
+.vscode/
+
+# Other editors
+*.sublime-workspace
+*.sublime-project
 *.swp
 *.swo
+*~
+.history/
+.ionide/
 *.swn
 *~
 [._].s
 .netrwhist
+*.code-workspace
+.history/
+
+# ========================================
+# General / Production Best Practices
+# ========================================
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Misc
+tmp/
+temp/
+.local/
+*.tgz
+*.tar.gz
+
+# Secrets
+*.pem
+*.key
+*.cert
+secrets/
+credentials/
