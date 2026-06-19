@@ -10,12 +10,12 @@ To maintain the architectural integrity and security standards required for ente
 
 ## Code of Conduct
 
-By participating in this project, you agree to abide by our Code of Conduct [Link to your CODE_OF_CONDUCT.md if you have one, or standard contributor covenant]. Please treat all maintainers and contributors with respect.
+By participating in this project, you agree to abide by our Code of Conduct [https://github.com/abluva-research/mcp-trust-plane/blob/main/.github/CODE_OF_CONDUCT.md] Please treat all maintainers and contributors with respect.
 
 ## How Can I Contribute?
 
 ### 1. Reporting Bugs
-* Check the [Issues Tab](https://github.com) to ensure the bug hasn't already been reported.
+* Check the [Issues Tab] to ensure the bug hasn't already been reported.
 * If it is a new issue, open a bug report using our issue template.
 * Provide a clear description, reproduction steps, and context about your MCP host/gateway environment.
 
