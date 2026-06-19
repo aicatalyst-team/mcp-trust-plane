@@ -7,24 +7,31 @@ on:
 permissions: read-all
 jobs:
   build:
-    name: Build and Validate
+    name: Build and Test
     runs-on: ubuntu-latest
     permissions:
       contents: read
+
     steps:
       - name: Checkout code
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
       - name: Set up Node
-        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Install deps in every package
+      - name: Install dependencies
         run: |
           find . -name "package.json" -not -path "*/node_modules/*" -execdir npm install \;
-      - name: Build all Docker images
+      - name: Build common images
         run: |
-          for f in $(find . -name "Dockerfile" -not -path "*/node_modules/*"); do
+          for f in $(find ./common -name "Dockerfile"); do
             dir=$(dirname "$f")
-            echo "Building $dir"
-            docker build -t "$(basename "$dir")" "$dir"
+            echo "Building $f with context $dir"
+            docker build -f "$f" -t "$(basename "$dir")" "$dir"
+          done
+      - name: Build provider images
+        run: |
+          for f in $(find ./provider -name "Dockerfile"); do
+            echo "Building $f with context ./provider"
+            docker build -f "$f" -t "$(basename "$(dirname "$f")")" ./provider
           done
