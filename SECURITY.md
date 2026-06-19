@@ -1,12 +1,5 @@
 # Security Policy
 
-## Supported Versions
-
-| Version | Supported          |
-| ------- | ------------------ |
-| 1.0.x   | :white_check_mark: |
-| < 1.0   | :x:                |
-
 ## Reporting a Vulnerability
 
 **Please do not open a public GitHub issue for security vulnerabilities.**  
@@ -54,6 +47,7 @@ To help us triage and resolve the issue quickly, please provide:
 | Fix or mitigation                | Within 90 days  |
 | Notification to reporter         | Upon release    |
 
+We may reach out for additional details during the investigation.
 
 ---
 
@@ -65,3 +59,5 @@ We follow **coordinated responsible disclosure**:
 - We will credit reporters in the release notes (unless you prefer to remain anonymous)
 - If a vulnerability is not resolved within 90 days, we will work with you on a 
   mutually agreed disclosure timeline
+
+  [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13305/badge)](https://www.bestpractices.dev/projects/13305)
