@@ -177,4 +177,8 @@ mcp-filters/
     ├── contract.js        # HTTP contract for every filter
     └── behaviour.js       # decision-logic regression tests
 ```
+## CII-Best-Practices Badge
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13305/badge)](https://www.bestpractices.dev/projects/13305)
+
+## OpenSSF Scorecard
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/abluva-research/mcp-trust-plane/badge)](https://securityscorecards.dev/viewer/?uri=github.com/abluva-research/mcp-trust-plane)
