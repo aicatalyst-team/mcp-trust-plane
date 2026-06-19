@@ -1,0 +1,30 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+permissions: read-all
+jobs:
+  build:
+    name: Build and Validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Set up Node
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af
+        with:
+          node-version: '20'
+      - name: Install deps in every package
+        run: |
+          find . -name "package.json" -not -path "*/node_modules/*" -execdir npm install \;
+      - name: Build all Docker images
+        run: |
+          for f in $(find . -name "Dockerfile" -not -path "*/node_modules/*"); do
+            dir=$(dirname "$f")
+            echo "Building $dir"
+            docker build -t "$(basename "$dir")" "$dir"
+          done
