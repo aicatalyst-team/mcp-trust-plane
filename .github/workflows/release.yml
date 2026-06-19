@@ -1,0 +1,36 @@
+name: Release
+on:
+  push:
+    tags:
+      - 'v*'
+permissions: read-all
+jobs:
+  release:
+    name: Sign and Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Install cosign
+        uses: sigstore/cosign-installer@d7d6bc7722e3daa8354c50bcb52f4837da5e9b6a
+      - name: Create release archive
+        run: |
+          zip -r release.zip . -x "*.git*"
+      - name: Sign with cosign
+        run: |
+          cosign sign-blob \
+            --yes \
+            --output-signature release.sig \
+            --output-certificate release.pem \
+            release.zip
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@da05d552573ad5aba039eaac05058a918a7bf631
+        with:
+          files: |
+            release.zip
+            release.sig
+            release.pem
+          generate_release_notes: true
