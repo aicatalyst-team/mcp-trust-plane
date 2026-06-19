@@ -18,8 +18,7 @@ collaborative resolution directly on GitHub.
 
 ### Email
 
-If you are unable to use GitHub's private reporting, email us at:  
-security@abluva.com
+If you are unable to use GitHub's private reporting, email us.
 
 Please use the subject line: `[SECURITY] <brief description>`
 
