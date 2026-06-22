@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rate-limiter
+  namespace: poc-mcp-trust-plane
+  labels:
+    app: rate-limiter
+    autopoc.io/project: mcp-trust-plane
+spec:
+  type: ClusterIP
+  selector:
+    app: rate-limiter
+  ports:
+    - port: 6007
+      targetPort: 6007

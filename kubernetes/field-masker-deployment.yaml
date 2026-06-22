@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: field-masker
+  namespace: poc-mcp-trust-plane
+  labels:
+    app: field-masker
+    autopoc.io/project: mcp-trust-plane
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: field-masker
+  template:
+    metadata:
+      labels:
+        app: field-masker
+    spec:
+      containers:
+        - name: field-masker
+          image: quay.io/aicatalyst/mcp-trust-plane-field-masker:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 6008
+          env:
+            - name: PORT
+              value: "6008"
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "250m"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 6008
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 6008
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL

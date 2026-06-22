@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: row-limiter
+  namespace: poc-mcp-trust-plane
+  labels:
+    app: row-limiter
+    autopoc.io/project: mcp-trust-plane
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: row-limiter
+  template:
+    metadata:
+      labels:
+        app: row-limiter
+    spec:
+      containers:
+        - name: row-limiter
+          image: quay.io/aicatalyst/mcp-trust-plane-row-limiter:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 6003
+          env:
+            - name: PORT
+              value: "6003"
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "250m"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 6003
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 6003
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL

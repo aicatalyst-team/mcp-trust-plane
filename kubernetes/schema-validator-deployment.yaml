@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: schema-validator
+  namespace: poc-mcp-trust-plane
+  labels:
+    app: schema-validator
+    autopoc.io/project: mcp-trust-plane
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: schema-validator
+  template:
+    metadata:
+      labels:
+        app: schema-validator
+    spec:
+      containers:
+        - name: schema-validator
+          image: quay.io/aicatalyst/mcp-trust-plane-schema-validator:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 6005
+          env:
+            - name: PORT
+              value: "6005"
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "250m"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 6005
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 6005
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
