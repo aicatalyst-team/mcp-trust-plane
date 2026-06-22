@@ -16,6 +16,8 @@ spec:
       labels:
         app: rate-limiter
     spec:
+      imagePullSecrets:
+        - name: quay-pull-secret
       containers:
         - name: rate-limiter
           image: quay.io/aicatalyst/mcp-trust-plane-rate-limiter:latest

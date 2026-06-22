@@ -16,6 +16,8 @@ spec:
       labels:
         app: pii-redactor
     spec:
+      imagePullSecrets:
+        - name: quay-pull-secret
       containers:
         - name: pii-redactor
           image: quay.io/aicatalyst/mcp-trust-plane-pii-redactor:latest

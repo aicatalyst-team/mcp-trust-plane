@@ -16,6 +16,8 @@ spec:
       labels:
         app: schema-validator
     spec:
+      imagePullSecrets:
+        - name: quay-pull-secret
       containers:
         - name: schema-validator
           image: quay.io/aicatalyst/mcp-trust-plane-schema-validator:latest

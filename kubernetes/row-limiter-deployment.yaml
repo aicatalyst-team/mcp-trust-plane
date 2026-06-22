@@ -16,6 +16,8 @@ spec:
       labels:
         app: row-limiter
     spec:
+      imagePullSecrets:
+        - name: quay-pull-secret
       containers:
         - name: row-limiter
           image: quay.io/aicatalyst/mcp-trust-plane-row-limiter:latest
