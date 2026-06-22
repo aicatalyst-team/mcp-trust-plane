@@ -1,0 +1,9 @@
+.git
+*.md
+LICENSE
+kubernetes/
+poc-plan.md
+tests/
+docs/
+node_modules/
+.env*
